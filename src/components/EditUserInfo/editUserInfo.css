@@ -1,0 +1,19 @@
+.edituserinfo {
+    display: flex;
+    flex-direction: column;
+    width : 25%;
+    margin: auto;
+}
+.edituserinfo .input-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    gap: 10px;
+    align-items: center;
+}
+.edituserinfo input {
+    width : 50%;
+}
+.edituserinfo button {
+    cursor: pointer;
+}
