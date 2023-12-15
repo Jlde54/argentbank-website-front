@@ -7,12 +7,19 @@ export const loginUser=createAsyncThunk('loginUser', async (credential) => {
     //     headers: {'Content-Type': 'application/json', 'accept': 'application/json'},
     //     body: JSON.stringify({credential})
     //     });
+        console.log("Credential : ",credential);
         const requestLogin = await axios.post('http://localhost:3001/api/v1/user/login', credential);
-        const token = await requestLogin.data.body.token;
+        console.log("requestLogin : ",requestLogin);
+
+        const token = requestLogin.data.body.token;
+        console.log("token : ",token);
+        
         sessionStorage.setItem('user', JSON.stringify(requestLogin.data.body.token));
+        console.log("JSON.stringify(requestLogin.data.body.token : ",JSON.stringify(requestLogin.data.body.token));
 
         const config = {
             headers: {
+                'Content-Type' : 'application/json',
                 'accept': 'application/json',
                 'Authorization': token
             }
@@ -20,7 +27,7 @@ export const loginUser=createAsyncThunk('loginUser', async (credential) => {
         console.log("config: ", config)
         const requestProfile = await axios.post('http://localhost:3001/api/v1/user/profile', config);
         console.log("requestProfile: ", requestProfile)
-        const response = await requestProfile;
+        const response = requestProfile;
         return response;
 })
 

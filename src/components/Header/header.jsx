@@ -5,14 +5,14 @@ import { useState } from "react";
 
 const getUser = () => {
   let user = sessionStorage.getItem('user')
-  console.log("User dans header.jsx : ", user)
+  // console.log("User dans header.jsx : ", user)
 }
 
 function Header() {
 
   const [user, setUser] = useState(getUser());
 
-  console.log("User : ",user)
+  // console.log("User : ",user)
 
   const handleLogout = () => {
     sessionStorage.clear();

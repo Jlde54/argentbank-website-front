@@ -10,9 +10,9 @@ function Login() {
   const [password, setPassword] = useState('');
 
   const {isLoading, user, error} = useSelector((state) => state.user)
-  console.log("State isLoading : ",isLoading)
-  console.log("State user : ",user)
-  console.log("State error : ",error)
+  // console.log("State isLoading : ",isLoading)
+  // console.log("State user : ",user)
+  // console.log("State error : ",error)
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,9 +20,9 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let credential= {email, password};
-    console.log("Credential : ",credential)
+    // console.log("Credential : ",credential)
     dispatch(loginUser(credential)).then((result) =>{
-      console.log("result.payload : ", result.payload)
+      // console.log("result.payload : ", result.payload)
       if(result.payload){
         setEmail('');
         setPassword('');
