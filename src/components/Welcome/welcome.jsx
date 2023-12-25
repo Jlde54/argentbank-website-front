@@ -4,14 +4,17 @@ import { useNavigate } from "react-router-dom";
 
 function Welcome() {
 
-    const firstName = useSelector(state => state.FirstName.value)
-    const lastName = useSelector(state => state.LastName.value)
-    const fullName = firstName + ' ' + lastName + ' !'
-    
-    const navigate = useNavigate()
+  // const token = sessionStorage.getItem('token');
+  const token = useSelector((state) => state.user.token)
+  const firstName = useSelector((state) => token? state.user.firstName : null)
+  const lastName = useSelector((state) => token? state.user.lastName : null)
+  const fullName = firstName + ' ' + lastName + ' !'
+  
+  const navigate = useNavigate()
 
-    const handleEditName = () => {
-      navigate('/editUserInfo')
+
+  const handleEditName = () => {
+    navigate('/editUserInfo')
   }
 
   return (

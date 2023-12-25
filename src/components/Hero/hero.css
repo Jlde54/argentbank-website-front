@@ -1,5 +1,6 @@
 .hero {
-    background-image: url('../../assets/images/bank-tree.jpeg');
+    /* background-image: url('../../assets/images/bank-tree.jpeg'); */
+    background-image: url('../../assets/images/bank-tree-400.webp');
     background-position: 0 -50px;
     background-size: cover;
     background-repeat: no-repeat;
@@ -28,6 +29,18 @@
     font-size: 0.9rem;
   }
   
+  @media (min-width: 600px) {
+    .hero {
+      background-image: url('../../assets/images/bank-tree-600.webp');
+    }
+  }
+
+  @media (min-width: 800px) {
+    .hero {
+      background-image: url('../../assets/images/bank-tree-800.webp');
+    }
+  }
+
   @media (min-width: 920px) {
     .hero {
       height: 400px;
@@ -48,5 +61,11 @@
   
     .hero-content .text {
       font-size: 1.2rem;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .hero {
+      background-image: url('../../assets/images/bank-tree.webp');
     }
   }

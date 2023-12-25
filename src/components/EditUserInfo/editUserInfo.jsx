@@ -1,17 +1,23 @@
+import React, {useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import Header from "../Header/header.jsx"
 import Account from '../Account/account.jsx';
-import Login from '../../containers/Login/login.jsx'
+import Home from '../../containers/Home/home.jsx'
+import { updateUserName } from '../../Redux/userSlicer.jsx';
 import './editUserInfo.css'
 
 function EditUserInfo() {
 
-  const token = useSelector(state => state.Token.value)
-  const firstName = useSelector(state => state.FirstName.value)
-  const lastName = useSelector(state => state.LastName.value)
-  const userName = useSelector(state => state.UserName.value)
-  const error = useSelector(state => state.Error.value)
+  // const token = sessionStorage.getItem('token')
+  const token = useSelector((state) => state.user.token)
+
+  const firstName = useSelector(state => token? state.user.firstName : null)
+  const lastName = useSelector(state => token? state.user.lastName : null)
+  const userName = useSelector(state => token? state.user.userName : null)
+  const error = useSelector(state => token? state.user.error : null)
+
+  const [newUserName, setNewUserName] = useState(userName)
 
   const dispatch = useDispatch()
 
@@ -19,27 +25,11 @@ function EditUserInfo() {
 
   const handleSave = async (e) => {
     e.preventDefault();
-    try {
-      const profileResponse = await fetch('http://localhost:3001/api/v1/user/profile',
-        {
-          method: 'PUT',
-          headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer' + token},
-          body: JSON.stringify({userName})
-        })
-        const dataProfile = await profileResponse.json();
-        dispatch({
-          type:"userName/getUserName",
-          payload:userName
-        })
-        sessionStorage.setItem('userName', dataProfile.body.userName);
+    dispatch(updateUserName({token, newUserName})).then((result) => {
+      if(result.payload) {
         navigate('/profile')
-  }
-  catch {
-    dispatch({
-      type:"error/getError",
-      payload:'Invalid access'
+      }
     })
-  }
   }
 
   const handleCancel = (e) => {
@@ -47,16 +37,10 @@ function EditUserInfo() {
     navigate('/profile')
   }
 
-  const handleUserName = (e) => {
-    dispatch({
-      type:"userName/getUserName",
-      payload:e.target.value
-    })
-  }
 
   return (
-    <>
-    {token &&
+    // <>
+    // {token &&
     <>
     <Header />
       <section className='edituserinfo'>
@@ -64,7 +48,7 @@ function EditUserInfo() {
         <form>
           <div className="input-wrapper">
             <label htmlFor="userName">User name</label>
-            <input type="text" id="userName" value={userName} onChange={handleUserName}></input>
+            <input type="text" id="userName" value={newUserName} onChange={(e)=>setNewUserName(e.target.value)}></input>
           </div>
           <div className="input-wrapper">
             <label htmlFor="firstName">First name</label>
@@ -81,13 +65,16 @@ function EditUserInfo() {
           </div>
         </form>
       </section>
-      <Account origin="editUserInfo"/>
+      <h2 className="sr-only">Accounts</h2>
+      <Account origin="editUserInfo" title="Argent Bank Checking (x8349)" amount="$2,082.79" description="Available Balance"/>
+      <Account origin="editUserInfo" titlev="Argent Bank Savings (x6712)" amount="$10,928.42" description="Available Balance"/>
+      <Account origin="editUserInfo" title="Argent Bank Credit Card (x8349)" amount="$184.30" description="Current Balance"/>
     </>
-  }
-  {!token &&
-            <Login />
-        }
-  </>
+  // }
+  // {!token &&
+  //           <Home />
+  //       }
+  // </>
   )
 }
 

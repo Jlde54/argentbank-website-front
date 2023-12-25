@@ -1,14 +1,3 @@
-.features {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  @media (min-width: 920px) {
-    .features {
-      flex-direction: row;
-    }
-  }
-  
   .feature-icon {
     width: 100px;
     border: 10px solid #00bc77;

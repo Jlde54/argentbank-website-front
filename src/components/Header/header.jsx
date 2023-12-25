@@ -1,22 +1,23 @@
+import { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from "react-router-dom"
 import logo from '../../assets/images/argentBankLogo.png'
+import {logout} from '../../Redux/userSlicer.jsx'
 import './header.css'
-import { useState } from "react";
-
-const getUser = () => {
-  let user = sessionStorage.getItem('user')
-  // console.log("User dans header.jsx : ", user)
-}
 
 function Header() {
 
-  const [user, setUser] = useState(getUser());
+  const dispatch = useDispatch();
 
-  // console.log("User : ",user)
+  // const [token, setToken] = useState(sessionStorage.getItem('token'));
+  const token  = useSelector((state) => state.user.token)
+
+  const firstName = useSelector((state) => token? state.user.firstName : null)
 
   const handleLogout = () => {
-    sessionStorage.clear();
-    setUser('');
+    // sessionStorage.removeItem('token');
+    dispatch(logout());
+    // setToken('');
   };
 
   return (
@@ -26,17 +27,17 @@ function Header() {
         <h1 className="sr-only">Argent Bank</h1>
       </NavLink>
       <div>
-        {!user &&
+        {!token &&
           <NavLink className="main-nav-item" to="/login" >
             <i className="fa fa-user-circle"></i>
             Sign In
           </NavLink>
         }
-        {user &&
+        {token &&
           <>
             <span className="main-nav-item main-nav-reduce">
               <i className="fa fa-user-circle"></i>
-              {user.firstName}
+              {firstName}
             </span>
             <NavLink className="main-nav-item" onClick={handleLogout} to="/">
               <i className="fa fa-sign-out"></i>
