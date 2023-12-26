@@ -3,13 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import Header from "../Header/header.jsx"
 import Account from '../Account/account.jsx';
-import Home from '../../containers/Home/home.jsx'
 import { updateUserName } from '../../Redux/userSlicer.jsx';
 import './editUserInfo.css'
 
 function EditUserInfo() {
 
-  // const token = sessionStorage.getItem('token')
   const token = useSelector((state) => state.user.token)
 
   const firstName = useSelector(state => token? state.user.firstName : null)
@@ -39,8 +37,6 @@ function EditUserInfo() {
 
 
   return (
-    // <>
-    // {token &&
     <>
     <Header />
       <section className='edituserinfo'>
@@ -70,11 +66,6 @@ function EditUserInfo() {
       <Account origin="editUserInfo" titlev="Argent Bank Savings (x6712)" amount="$10,928.42" description="Available Balance"/>
       <Account origin="editUserInfo" title="Argent Bank Credit Card (x8349)" amount="$184.30" description="Current Balance"/>
     </>
-  // }
-  // {!token &&
-  //           <Home />
-  //       }
-  // </>
   )
 }
 

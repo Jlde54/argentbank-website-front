@@ -13,7 +13,27 @@
 }
 .edituserinfo input {
     width : 50%;
+    border-radius: 5px;
+    border-color: darkgray;
 }
 .edituserinfo button {
     cursor: pointer;
+    border-radius: 5px;
+    border-color: darkgray;
+
+}
+.edituserinfo #firstName, #lastName {
+    background-color: rgb(222, 220, 220);
+    color: darkgray;
+}
+
+@media (max-width: 900px) {
+    .edituserinfo {
+        width : 40%;
+    }
+}
+@media (max-width: 550px) {
+    .edituserinfo {
+        width : 50%;
+    }
 }

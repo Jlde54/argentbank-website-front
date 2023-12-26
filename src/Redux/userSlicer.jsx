@@ -12,7 +12,7 @@ const initialState = {
 
 // call API to get the token
 // two parameters :
-// 1.name of the action, the standard convention is "[slice name]/[action name]" such as "posts/fetchPosts"
+// 1.name of the action, the standard convention is "[slice name]/[action name]"
 // 2.The callback function that performs the API call and returns the result when it is finished.
 export const getToken=createAsyncThunk('user/getToken', async (credential) => {
     const response = await axios.post('http://localhost:3001/api/v1/user/login', credential);
@@ -64,7 +64,8 @@ const userSlice = createSlice({
 
     // 3 actions générées par asyncThunk
     // extraRducers permet de définir des reducers supplémentaires en dehors du slice
-    // extraReducers are used to handle actions that are created by createAsyncThunk. Based on the status of the promise, we will update our state.
+    // extraReducers are used to handle actions that are created by createAsyncThunk. 
+    // Based on the status of the promise, we will update our state.
     // For each action that is created using createAsyncThunk, there are three probable state for the promise returned. pending, fulfilled, rejected.
     extraReducers: (builder) => {     // "builder" est la fonction callback pour définir les reducers
         builder

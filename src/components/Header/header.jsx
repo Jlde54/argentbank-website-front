@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from "react-router-dom"
 import logo from '../../assets/images/argentBankLogo.png'
@@ -9,15 +8,12 @@ function Header() {
 
   const dispatch = useDispatch();
 
-  // const [token, setToken] = useState(sessionStorage.getItem('token'));
   const token  = useSelector((state) => state.user.token)
 
-  const firstName = useSelector((state) => token? state.user.firstName : null)
+  const userName = useSelector((state) => token? state.user.userName : null)
 
   const handleLogout = () => {
-    // sessionStorage.removeItem('token');
     dispatch(logout());
-    // setToken('');
   };
 
   return (
@@ -37,9 +33,9 @@ function Header() {
           <>
             <span className="main-nav-item main-nav-reduce">
               <i className="fa fa-user-circle"></i>
-              {firstName}
+              {userName}
             </span>
-            <NavLink className="main-nav-item" onClick={handleLogout} to="/">
+            <NavLink className="main-nav-item justify-right" onClick={handleLogout} to="/">
               <i className="fa fa-sign-out"></i>
               Sign Out
             </NavLink>

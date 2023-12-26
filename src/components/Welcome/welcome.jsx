@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 function Welcome() {
 
-  // const token = sessionStorage.getItem('token');
   const token = useSelector((state) => state.user.token)
   const firstName = useSelector((state) => token? state.user.firstName : null)
   const lastName = useSelector((state) => token? state.user.lastName : null)
@@ -20,7 +19,7 @@ function Welcome() {
   return (
     <div className="header">
         <h1>Welcome back<br />{fullName}</h1>
-        <button className="edit-button"onClick={handleEditName}>Edit Name</button>
+        <button className="edit-button" onClick={handleEditName}>Edit Name</button>
     </div>
   )
 }
